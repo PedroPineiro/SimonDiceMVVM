@@ -10,7 +10,6 @@ enum class Colores(val valorColor:Int){
     VERDE(2),
     AZUL(3),
     AMARILLO(4)
-
 }
 
 enum class ColoresIluminados(var colorNomal : Color, var colorIluminado:Color = Color.Transparent){

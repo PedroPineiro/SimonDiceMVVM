@@ -13,5 +13,4 @@ enum class Estados(val startActivo: Boolean, val botonesColoresActivos:Boolean){
      */
     INICIO(startActivo = true, botonesColoresActivos = false),
     ADIVINANDO(startActivo = false, botonesColoresActivos = true),
-
 }

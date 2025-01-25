@@ -48,6 +48,12 @@ fun SimonDiceUI() {
             CrearButton(color = DarkBlue, onClick = { println("Botón amarillo") })
         }
 
+        Row(
+            modifier = Modifier.padding(top = 70.dp),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            StartButton()
+        }
     }
 }
 
@@ -61,7 +67,17 @@ fun CrearButton(color: Color, onClick: () -> Unit) {
     ) {}
 }
 
-
+@Composable
+fun StartButton(){
+    Button(
+        onClick = { println("Botón de inicio") },
+        shape = MaterialTheme.shapes.large,
+        modifier = Modifier.width(160.dp).height(60.dp),
+        colors = ButtonDefaults.buttonColors(containerColor = DarkWhite)
+    ) {
+        Text(text = "Empezar", color = Color.Black)
+    }
+}
 
 @Preview(showBackground = true)
 @Composable

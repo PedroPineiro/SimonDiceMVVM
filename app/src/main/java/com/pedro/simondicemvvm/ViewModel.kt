@@ -17,7 +17,7 @@ import kotlin.random.Random
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class MyViewModel(): ViewModel() {
+class ViewModel(): ViewModel() {
 
     var random = Random
 

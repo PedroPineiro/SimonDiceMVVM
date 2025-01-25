@@ -3,7 +3,7 @@ package com.pedro.simondicemvvm
 import androidx.lifecycle.ViewModel
 import androidx.compose.runtime.mutableStateOf
 
-class SimonViewModel : ViewModel() {
+class ViewModel : ViewModel() {
     // Estado básico del juego
     var gameState = mutableStateOf("Presiona 'Empezar' para jugar")
         private set

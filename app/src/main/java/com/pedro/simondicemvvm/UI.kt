@@ -1,7 +1,6 @@
 package com.pedro.simondicemvvm
 
-import android.util.Log
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,16 +25,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pedro.simondicemvvm.datos.Colores
-import com.pedro.simondicemvvm.datos.ColoresIluminados
-import com.pedro.simondicemvvm.datos.Datos
-import com.pedro.simondicemvvm.datos.Estados
+import com.pedro.simondicemvvm.ui.theme.DarkWhite
+import com.pedro.simondicemvvm.ui.theme.LightDark
 
 
 /**
@@ -74,7 +71,7 @@ fun myApp(viewModel: ViewModel) {
 
 
         Column {
-            RecordMaximo(record)
+            showRecord(record)
             showAciertos(aciertos)
         }
 
@@ -91,7 +88,10 @@ fun myApp(viewModel: ViewModel) {
             Row {
 
                 buttonColor(
-                    viewModel, lista_colores, viewModel.getRandom(), Colores.ROJO.valorColor,
+                    viewModel,
+                    lista_colores,
+                    viewModel.getRandom(),
+                    Colores.ROJO.valorColor,
                     colorRojo
                 )
                 buttonColor(
@@ -134,27 +134,19 @@ fun myApp(viewModel: ViewModel) {
  */
 @Composable
 fun showAciertos(aciertos:Int){
-
         Text(text = "Aciertos: $aciertos" ,
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold)
-
 }
 
 /**
  * Interfaz para mostrar el record maximo del usuario en el juego
  */
 @Composable
-fun RecordMaximo(record:Int){
-    Column(verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
-            .padding(top = 50.dp, start = 130.dp)) {
-
+fun showRecord(record:Int){
         Text(text = "Record: $record" ,
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold)
-
-    }
 }
 
 /**
@@ -177,10 +169,8 @@ fun buttonColor(viewModel: ViewModel, listaColores: MutableList<Int>, lista_Rand
         colors = ButtonDefaults.buttonColors(
             containerColor = color,
         ),
-        modifier = Modifier
-            .clip(CircleShape)
-            .padding(3.dp)
-            .size(95.dp)
+        shape = MaterialTheme.shapes.large,
+        modifier = Modifier.size(150.dp).border(3.dp, DarkWhite, MaterialTheme.shapes.large),
     ){
 
     }
@@ -195,18 +185,11 @@ fun buttonColor(viewModel: ViewModel, listaColores: MutableList<Int>, lista_Rand
  */
 @Composable
 fun showRondas(numeroRondas:Int){
-
     Text(
-
         text = "Ronda: $numeroRondas",
-
         fontWeight = FontWeight.Bold,
         fontSize = 20.sp,
-        modifier = Modifier
-            .padding(top = 100.dp)
-
     )
-
 }
 
 /**
@@ -220,20 +203,12 @@ fun showButtonStart(viewModel: ViewModel){
     viewModel.estadoLiveData.observe(LocalLifecycleOwner.current) {
         _activo = viewModel.estadoLiveData.value!!.startActivo
     }
-
-
-    val rosa = Color(0xFFFF00C9)
-    Column(verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .padding(top = 40.dp))
-    {
         Button(
             enabled = _activo,
             onClick = { viewModel.setRandom() },
             colors = ButtonDefaults.buttonColors(
-                containerColor = rosa,
-                contentColor = Color.Black
+                containerColor = LightDark,
+                contentColor = DarkWhite
             ),
             modifier = Modifier
                 .size(145.dp)
@@ -244,13 +219,6 @@ fun showButtonStart(viewModel: ViewModel){
                 fontWeight = FontWeight.Bold)
 
         }
-    }
-
-
-}
-
-
-
 
 }
 

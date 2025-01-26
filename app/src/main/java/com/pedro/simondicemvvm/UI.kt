@@ -48,7 +48,7 @@ fun SimonDiceUI(viewModel: ViewModel) {
     val aciertos by viewModel.aciertosLiveData.observeAsState(viewModel.getAciertos())
 
     // Lista para almacenar los colores seleccionados
-    var listaColores = remember { mutableStateListOf<Int>() }
+    val listaColores = remember { mutableStateListOf<Int>() }
 
     // Observa los colores desde el ViewModel
     val colorRojo by viewModel.colorRojoLiveData.observeAsState(viewModel.getColorRed())

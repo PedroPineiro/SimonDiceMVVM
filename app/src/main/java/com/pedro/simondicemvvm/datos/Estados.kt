@@ -1,16 +1,19 @@
 package com.pedro.simondicemvvm.datos
 
 /**
- * Clase enum para manejar los estados de la aplicación
+ * Clase Enum para gestionar los estados de la aplicación.
+ *
+ * @property startActivo Indica si el botón de inicio está activo.
+ * @property botonesColoresActivos Indica si los botones de colores están activos.
  */
-enum class Estados(val startActivo: Boolean, val botonesColoresActivos:Boolean){
+enum class Estados(val startActivo: Boolean, val botonesColoresActivos: Boolean) {
 
     /**
-     * Estados de la aplicación
-     * 1. Inicio -> cuando se inicia la aplicación y aun no le dimos al start
-     * 2. Generando -> cuando la maquina genera los numeros randoms cuando le das al start y salen las toast informadoras
-     * 3. Advininando -> cuando el usuario teclea os botones de colores para adivinar los numeros
+     * Estados de la aplicación:
+     * 1. INICIO -> Cuando la aplicación inicia y el botón de inicio aún no ha sido presionado.
+     * 2. ADIVINANDO -> Cuando el usuario está presionando los botones de colores para adivinar los números.
      */
     INICIO(startActivo = true, botonesColoresActivos = false),
+
     ADIVINANDO(startActivo = false, botonesColoresActivos = true),
 }

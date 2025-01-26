@@ -16,6 +16,9 @@ import kotlin.random.Random
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+/**
+ * Clase ViewModel para gestionar la lógica del juego y los datos relacionados con la UI.
+ */
 class ViewModel(): ViewModel() {
 
     var random = Random
@@ -52,11 +55,17 @@ class ViewModel(): ViewModel() {
         _aciertosLiveData.value = aciertos
     }
 
+    /**
+     * Incrementa el número de aciertos del usuario.
+     */
     fun incrementAciertos() {
         aciertos += 1
         _aciertosLiveData.value = aciertos
     }
 
+    /**
+     * Incrementa el récord si el número actual de aciertos es mayor.
+     */
     fun incrementRecord() {
         if (getRecord() < getAciertos()) {
             record = aciertos
@@ -64,28 +73,38 @@ class ViewModel(): ViewModel() {
         }
     }
 
+    /**
+     * Devuelve el número de aciertos del usuario.
+     */
     fun getAciertos():Int{
         return aciertos
     }
 
+    /**
+     * Devuelve el récord actual.
+     */
     fun getRecord():Int{
         return record
     }
 
+    /**
+     * Incrementa tanto el número de aciertos como el récord.
+     */
     fun incrementValues(){
         incrementAciertos()
         incrementRecord()
     }
 
+    /**
+     * Reinicia el número de aciertos a cero.
+     */
     fun restartValues(){
         aciertos = 0
         _aciertosLiveData.value = aciertos
     }
 
-
-
     /**
-     * metodo que hace una secuencia de numeros aleatorios
+     * Genera una secuencia aleatoria de números y actualiza el estado del juego.
      */
     fun setRandom(){
         numRandom = random.nextInt(4) + 1
@@ -95,50 +114,48 @@ class ViewModel(): ViewModel() {
         Log.d("Random", Datos.listaNumerosRandom.toString())
     }
 
+    /**
+     * Añade un color a la secuencia del usuario y verifica si ha ganado o perdido.
+     */
     fun addColor(numero:Int, listaColoresR: MutableList<Int>, lista_Random:MutableList<Int>){
-
         listaColoresR.add(numero)
         Datos.listaColores = listaColoresR
         winOrLose(lista_Random, listaColoresR)
-
     }
 
-
-
-
     /**
-     * metodo para devolver la lista de numeros randoms
+     * Devuelve la lista de números aleatorios generados por la máquina.
      */
     fun getRandom():MutableList<Int>{
         return Datos.listaNumerosRandom
     }
 
     /**
-     * metodo que limpia la lista de ranoms
+     * Limpia la lista de números aleatorios.
      */
     fun clearListaRandoms(){
         Datos.listaNumerosRandom.clear()
     }
 
-
     /**
-     * metodo que limpia la lista de colores
+     * Limpia la lista de colores.
      */
     fun clearListaColores(lista:MutableList<Int>){
         lista.clear()
     }
 
-
     /**
-     * logica para saber si el usuario ganó o perdió la partida
+     * Verifica si el usuario ha ganado o perdido el juego.
      */
-
     fun winOrLose(lista_Random: MutableList<Int>, listaColores: MutableList<Int>){
         if(listaColores.size <= lista_Random.size){
             auxWinOrLose(lista_Random, listaColores)
         }
     }
 
+    /**
+     * Función auxiliar para verificar si la secuencia del usuario coincide con la secuencia de la máquina.
+     */
     private fun auxWinOrLose(lista_Random:MutableList<Int>,listaColores:MutableList<Int>){
         if(lista_Random == listaColores){
             onWin(listaColores)
@@ -155,15 +172,13 @@ class ViewModel(): ViewModel() {
         }
     }
 
-
-
     /**
-     * funcion de logica de ganador de rondas
-     * 1. guardamos el record
-     * 2. incrementamos las rondas
-     * 3. limpiamos la lista de colores
-     * 4. limpiamos la lista de randoms de maquina
-     * 5. incrementamos el contador para las rondas
+     * Lógica para cuando el usuario gana una ronda.
+     * 1. Guarda el récord.
+     * 2. Incrementa las rondas.
+     * 3. Limpia la lista de colores.
+     * 4. Limpia la lista de números aleatorios.
+     * 5. Incrementa el contador de rondas.
      */
     fun onWin(listaColores: MutableList<Int>) {
         estadoLiveData.value = Estados.INICIO
@@ -172,12 +187,12 @@ class ViewModel(): ViewModel() {
     }
 
     /**
-     * funcion de logica de perdedor de rondas
-     * 1. reseteamos los aciertos
-     * 2. reseteamos las rondas
-     * 3. limpiamos la lista de colores
-     * 4. limpiamos la lista de randoms de maquina
-     * 5. bajamos el contador a 1 de nuevo
+     * Lógica para cuando el usuario pierde una ronda.
+     * 1. Reinicia el número de aciertos.
+     * 2. Reinicia las rondas.
+     * 3. Limpia la lista de colores.
+     * 4. Limpia la lista de números aleatorios.
+     * 5. Establece el contador de nuevo a 1.
      */
     fun onLose(listaColores: MutableList<Int>){
         estadoLiveData.value = Estados.INICIO
@@ -186,6 +201,9 @@ class ViewModel(): ViewModel() {
         clearListaRandoms()
     }
 
+    /**
+     * Cambia los colores según la secuencia aleatoria generada.
+     */
     private fun cambiosColores(lista_Random: MutableList<Int>){
         viewModelScope.launch {
             for(i in 0 until lista_Random.size){
@@ -221,15 +239,30 @@ class ViewModel(): ViewModel() {
         }
     }
 
+    /**
+     * Devuelve el color rojo normal.
+     */
     fun getColorRed():Color{
         return ColoresIluminados.ROJO_PARPADEO.colorNomal
     }
+
+    /**
+     * Devuelve el color verde normal.
+     */
     fun getColorGreen():Color{
         return ColoresIluminados.VERDE_PARPADEO.colorNomal
     }
+
+    /**
+     * Devuelve el color azul normal.
+     */
     fun getColorBlue():Color{
         return ColoresIluminados.AZUL_PARPADEO.colorNomal
     }
+
+    /**
+     * Devuelve el color amarillo normal.
+     */
     fun getColorYellow():Color{
         return ColoresIluminados.AMARILLO_PARPADEO.colorNomal
     }

@@ -5,7 +5,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -38,193 +37,199 @@ import com.pedro.simondicemvvm.datos.Colores
 import com.pedro.simondicemvvm.ui.theme.DarkWhite
 import com.pedro.simondicemvvm.ui.theme.LightDark
 
-
 /**
- * app principal del juego
+ * UI principal del juego "Simón Dice".
  */
 @Composable
 fun SimonDiceUI(viewModel: ViewModel) {
 
+    // Observa los datos en vivo desde el ViewModel
     val record by viewModel.recordLiveData.observeAsState(viewModel.getRecord())
     val aciertos by viewModel.aciertosLiveData.observeAsState(viewModel.getAciertos())
 
+    // Lista para almacenar los colores seleccionados
+    var listaColores = remember { mutableStateListOf<Int>() }
 
-    var lista_colores = remember { mutableStateListOf<Int>() }
-
+    // Observa los colores desde el ViewModel
     val colorRojo by viewModel.colorRojoLiveData.observeAsState(viewModel.getColorRed())
     val colorVerde by viewModel.colorVerdeLiveData.observeAsState(viewModel.getColorGreen())
     val colorAzul by viewModel.colorAzulLiveData.observeAsState(viewModel.getColorBlue())
     val colorAmarillo by viewModel.colorAmarilloLiveData.observeAsState(viewModel.getColorYellow())
 
-
-
+    // Caja principal que contiene toda la interfaz
     Box(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxSize() // Hace que la caja ocupe todo el tamaño disponible
     ) {
+        // Imagen de fondo
         val backgroundImage = painterResource(id = R.drawable.fondo)
         Image(
-            painter = backgroundImage,
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
+            painter = backgroundImage, // Carga la imagen desde los recursos
+            contentDescription = null, // No se necesita descripción de contenido
+            contentScale = ContentScale.Crop, // Escala la imagen para que cubra todo el fondo
+            modifier = Modifier.fillMaxSize() // Asegura que la imagen ocupe todo el espacio disponible
         )
 
-
-
+        // Sección superior: muestra el récord y los aciertos
         Column (
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth().padding(top = 45.dp)
+            modifier = Modifier.fillMaxWidth().padding(top = 45.dp) // Alineación y margen superior
         ) {
             Row {
-                crearRecordText(record)
-                Spacer(modifier = Modifier.width(60.dp))
-                crearAciertosText(aciertos)
+                CrearRecordText(record) // Muestra el texto del récord
+                Spacer(modifier = Modifier.width(60.dp)) // Espaciado entre el récord y los aciertos
+                CrearAciertosText(aciertos) // Muestra el texto de aciertos
             }
         }
 
-
+        // Sección central: botones de colores y botón de inicio
         Column(
 
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxSize()
+            verticalArrangement = Arrangement.Center, // Centra verticalmente los elementos
+            horizontalAlignment = Alignment.CenterHorizontally, // Centra horizontalmente los elementos
+            modifier = Modifier.fillMaxSize() // Ocupa todo el tamaño disponible
 
         ) {
 
-            Spacer(modifier = Modifier.height(60.dp))
+            Spacer(modifier = Modifier.height(60.dp)) // Espaciado superior
 
+            // Fila de botones: rojo y verde
             Row {
 
-                crearColorButton(
+                CrearColorButton(
                     viewModel,
-                    lista_colores,
+                    listaColores,
                     viewModel.getRandom(),
-                    Colores.ROJO.valorColor,
-                    colorRojo
+                    Colores.ROJO.valorColor, // Color rojo
+                    colorRojo // Color dinámico observado
                 )
 
-                Spacer(modifier = Modifier.width(20.dp))
+                Spacer(modifier = Modifier.width(20.dp)) // Espaciado entre los botones
 
-                crearColorButton(
+                CrearColorButton(
                     viewModel,
-                    lista_colores,
+                    listaColores,
                     viewModel.getRandom(),
-                    Colores.VERDE.valorColor,
-                    colorVerde
+                    Colores.VERDE.valorColor, // Color verde
+                    colorVerde // Color dinámico observado
                 )
             }
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(20.dp)) // Espaciado entre filas
 
+            // Fila de botones: azul y amarillo
             Row {
-                crearColorButton(
+                CrearColorButton(
                     viewModel,
-                    lista_colores,
+                    listaColores,
                     viewModel.getRandom(),
-                    Colores.AZUL.valorColor,
-                    colorAzul
+                    Colores.AZUL.valorColor, // Color azul
+                    colorAzul // Color dinámico observado
                 )
 
-                Spacer(modifier = Modifier.width(20.dp))
+                Spacer(modifier = Modifier.width(20.dp)) // Espaciado entre los botones
 
-                crearColorButton(
+                CrearColorButton(
                     viewModel,
-                    lista_colores,
+                    listaColores,
                     viewModel.getRandom(),
-                    Colores.AMARILLO.valorColor,
-                    colorAmarillo
+                    Colores.AMARILLO.valorColor, // Color amarillo
+                    colorAmarillo // Color dinámico observado
                 )
 
             }
 
-            crearStartButton(viewModel)
+            CrearStartButton(viewModel) // Botón para iniciar el juego
 
         }
     }
 }
 
 /**
- * Interfaz para mostrar el numero de aciertos del usuario
+ * Muestra el número de aciertos del usuario.
  */
 @Composable
-fun crearAciertosText(aciertos:Int){
-        Text(
-            text = "ACIERTOS: $aciertos",
-            fontSize = 25.sp,
-            fontWeight = FontWeight.Bold,
-            color = DarkWhite,
+fun CrearAciertosText(aciertos:Int){
+    Text(
+        text = "ACIERTOS: $aciertos",
+        fontSize = 25.sp, // Tamaño del texto
+        fontWeight = FontWeight.Bold, // Peso de fuente en negrita
+        color = DarkWhite, // Color del texto
 
-        )
+    )
 }
 
 /**
- * Interfaz para mostrar el record maximo del usuario en el juego
+ * Muestra el récord máximo del usuario.
  */
 @Composable
-fun crearRecordText(record:Int){
-        Text(
-            text = "RECORD: $record" ,
-            fontSize = 25.sp,
-            fontWeight = FontWeight.Bold,
-            color = DarkWhite
-        )
+fun CrearRecordText(record:Int){
+    Text(
+        text = "RECORD: $record" ,
+        fontSize = 25.sp, // Tamaño del texto
+        fontWeight = FontWeight.Bold, // Peso de fuente en negrita
+        color = DarkWhite // Color del texto
+    )
 }
 
 /**
- * Interfaz con el boton rojo
+ * Botón de color dinámico (rojo, verde, azul o amarillo).
  */
 @Composable
-fun crearColorButton(viewModel: ViewModel, listaColores: MutableList<Int>, lista_Random:MutableList<Int>, colorValor:Int, color: Color){
+fun CrearColorButton(viewModel: ViewModel, listaColores: MutableList<Int>, lista_Random:MutableList<Int>, colorValor:Int, color: Color){
 
+    // Estado para habilitar o deshabilitar el botón
     var _activo by remember { mutableStateOf(viewModel.estadoLiveData.value!!.botonesColoresActivos) }
 
+    // Observa cambios en el estado de los botones
     viewModel.estadoLiveData.observe(LocalLifecycleOwner.current) {
         _activo = viewModel.estadoLiveData.value!!.botonesColoresActivos
     }
 
     Button(
-        enabled = _activo,
+        enabled = _activo, // Habilita o deshabilita el botón según el estado
         onClick = {
-            viewModel.addColor(colorValor,listaColores, lista_Random)
+            viewModel.addColor(colorValor,listaColores, lista_Random) // Agrega el color seleccionado
         },
         colors = ButtonDefaults.buttonColors(
-            containerColor = color,
+            containerColor = color, // Color del botón
         ),
-        shape = MaterialTheme.shapes.large,
-        modifier = Modifier.size(170.dp).border(3.dp, DarkWhite, MaterialTheme.shapes.large),
+        shape = MaterialTheme.shapes.large, // Forma del botón
+        modifier = Modifier.size(170.dp).border(3.dp, DarkWhite, MaterialTheme.shapes.large), // Tamaño y borde
     ){
 
     }
 }
 
 /**
- * Interfaz que muestra el boton de start
+ * Botón de inicio del juego.
  */
 @Composable
-fun crearStartButton(viewModel: ViewModel){
+fun CrearStartButton(viewModel: ViewModel){
 
+    // Estado para habilitar o deshabilitar el botón
     var _activo by remember { mutableStateOf(viewModel.estadoLiveData.value!!.startActivo) }
 
+    // Observa cambios en el estado del botón
     viewModel.estadoLiveData.observe(LocalLifecycleOwner.current) {
         _activo = viewModel.estadoLiveData.value!!.startActivo
     }
-        Button(
-            enabled = _activo,
-            onClick = { viewModel.setRandom() },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = DarkWhite,
-                contentColor = LightDark),
-            shape = MaterialTheme.shapes.large,
-            modifier = Modifier
-                .padding(top = 50.dp)
-                .width(250.dp)
-                .height(100.dp)
-        ) {
-            Text(text = "START",
-                fontSize = 40.sp,
-                fontWeight = FontWeight.Bold,
-                )
-        }
+    Button(
+        enabled = _activo, // Habilita o deshabilita el botón según el estado
+        onClick = { viewModel.setRandom() }, // Acción al hacer clic
+        colors = ButtonDefaults.buttonColors(
+            containerColor = DarkWhite, // Color del botón
+            contentColor = LightDark), // Color del texto
+        shape = MaterialTheme.shapes.large, // Forma del botón
+        modifier = Modifier
+            .padding(top = 50.dp) // Espaciado superior
+            .width(250.dp) // Ancho del botón
+            .height(100.dp) // Altura del botón
+    ) {
+        Text(text = "START",
+            fontSize = 40.sp, // Tamaño del texto
+            fontWeight = FontWeight.Bold, // Peso de fuente en negrita
+        )
+    }
 }

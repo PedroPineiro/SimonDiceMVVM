@@ -46,7 +46,6 @@ import com.pedro.simondicemvvm.ui.theme.LightDark
 fun SimonDiceUI(viewModel: ViewModel) {
 
     val record by viewModel.recordLiveData.observeAsState(viewModel.getRecord())
-    val rondas by viewModel.rondasLiveData.observeAsState(viewModel.getRondas())
     val aciertos by viewModel.aciertosLiveData.observeAsState(viewModel.getAciertos())
 
 
@@ -95,6 +94,8 @@ fun SimonDiceUI(viewModel: ViewModel) {
 
         ) {
 
+            Spacer(modifier = Modifier.height(60.dp))
+
             Row {
 
                 crearColorButton(
@@ -139,12 +140,7 @@ fun SimonDiceUI(viewModel: ViewModel) {
 
             }
 
-            crearRondasText(rondas)
-
-            Spacer(modifier = Modifier.height(20.dp))
-
             crearStartButton(viewModel)
-
 
         }
     }
@@ -204,22 +200,6 @@ fun crearColorButton(viewModel: ViewModel, listaColores: MutableList<Int>, lista
     }
 }
 
-
-
-
-
-/**
- * Interfaz para mostrar las rondas que lleva el usuario
- */
-@Composable
-fun crearRondasText(numeroRondas:Int){
-    Text(
-        text = "Ronda: $numeroRondas",
-        fontWeight = FontWeight.Bold,
-        fontSize = 20.sp,
-    )
-}
-
 /**
  * Interfaz que muestra el boton de start
  */
@@ -239,6 +219,7 @@ fun crearStartButton(viewModel: ViewModel){
                 contentColor = LightDark),
             shape = MaterialTheme.shapes.large,
             modifier = Modifier
+                .padding(top = 50.dp)
                 .width(250.dp)
                 .height(100.dp)
         ) {

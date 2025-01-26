@@ -62,7 +62,6 @@ fun SimonDiceUI(viewModel: ViewModel) {
         modifier = Modifier
             .fillMaxSize()
     ) {
-        // Fondo con imagen
         val backgroundImage = painterResource(id = R.drawable.fondo)
         Image(
             painter = backgroundImage,

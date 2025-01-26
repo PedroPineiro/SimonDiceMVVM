@@ -61,14 +61,13 @@ fun SimonDiceUI(viewModel: ViewModel) {
             .fillMaxSize()
     ) {
         // Fondo con imagen
-        val backgroundImage = painterResource(id = R.drawable.fondo) // Asegúrate de que el nombre del recurso sea correcto
+        val backgroundImage = painterResource(id = R.drawable.fondo)
         Image(
             painter = backgroundImage,
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
         )
-
 
 
 
@@ -136,9 +135,12 @@ fun SimonDiceUI(viewModel: ViewModel) {
  */
 @Composable
 fun crearAciertosText(aciertos:Int){
-        Text(text = "Aciertos: $aciertos" ,
+        Text(
+            text = "Aciertos: $aciertos" ,
             fontSize = 25.sp,
-            fontWeight = FontWeight.Bold)
+            fontWeight = FontWeight.Bold,
+            color = DarkWhite
+        )
 }
 
 /**
@@ -146,9 +148,12 @@ fun crearAciertosText(aciertos:Int){
  */
 @Composable
 fun crearRecordText(record:Int){
-        Text(text = "Record: $record" ,
+        Text(
+            text = "Record: $record" ,
             fontSize = 25.sp,
-            fontWeight = FontWeight.Bold)
+            fontWeight = FontWeight.Bold,
+            color = DarkWhite
+        )
 }
 
 /**

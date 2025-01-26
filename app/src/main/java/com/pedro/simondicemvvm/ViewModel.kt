@@ -11,7 +11,6 @@ import com.pedro.simondicemvvm.datos.Datos
 import com.pedro.simondicemvvm.datos.Datos.aciertos
 import com.pedro.simondicemvvm.datos.Datos.numRandom
 import com.pedro.simondicemvvm.datos.Datos.record
-import com.pedro.simondicemvvm.datos.Datos.rondas
 import com.pedro.simondicemvvm.datos.Estados
 import kotlin.random.Random
 import kotlinx.coroutines.delay
@@ -25,9 +24,6 @@ class ViewModel(): ViewModel() {
 
     private val _recordLiveData = MutableLiveData<Int>()
     val recordLiveData: LiveData<Int> get() = _recordLiveData
-
-    private val _rondasLiveData = MutableLiveData<Int>()
-    val rondasLiveData: LiveData<Int> get() = _rondasLiveData
 
     private val _aciertosLiveData = MutableLiveData<Int>()
     val aciertosLiveData: LiveData<Int> get() = _aciertosLiveData
@@ -53,18 +49,12 @@ class ViewModel(): ViewModel() {
 
     init {
         _recordLiveData.value = record
-        _rondasLiveData.value = rondas
         _aciertosLiveData.value = aciertos
     }
 
     fun incrementAciertos() {
         aciertos += 1
         _aciertosLiveData.value = aciertos
-    }
-
-    fun incrementRondas() {
-        rondas += 1
-        _rondasLiveData.value = rondas
     }
 
     fun incrementRecord() {
@@ -78,24 +68,17 @@ class ViewModel(): ViewModel() {
         return aciertos
     }
 
-    fun getRondas():Int{
-        return rondas
-    }
-
     fun getRecord():Int{
         return record
     }
 
     fun incrementValues(){
         incrementAciertos()
-        incrementRondas()
         incrementRecord()
     }
 
     fun restartValues(){
         aciertos = 0
-        rondas = 0
-        _rondasLiveData.value = rondas
         _aciertosLiveData.value = aciertos
     }
 
@@ -162,7 +145,6 @@ class ViewModel(): ViewModel() {
             Log.d("random", "ganaste")
             Log.d("randomRe", getRecord().toString())
             Log.d("randomAc", getAciertos().toString())
-            Log.d("randomRor", getRondas().toString())
         }
         else if (lista_Random.subList(0, listaColores.size) == listaColores){
             Log.d("TAG", "CORRECTO")

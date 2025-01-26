@@ -208,32 +208,32 @@ class ViewModel(): ViewModel() {
         viewModelScope.launch {
             for(i in 0 until lista_Random.size){
                 if(lista_Random[i] == 1){
-                    delay(500)
+                    delay(300)
                     _colorRojoLiveData.value = Color(0xFFFF9999)
-                    delay(500)
+                    delay(300)
                     _colorRojoLiveData.value = ColoresIluminados.ROJO_PARPADEO.colorNomal
-                    delay(500)
+                    delay(300)
                 }
                 else if(lista_Random[i] == 2){
-                    delay(500)
+                    delay(300)
                     _colorVerdeLiveData.value = Color(0xFFA8FFAA)
-                    delay(500)
+                    delay(300)
                     _colorVerdeLiveData.value = ColoresIluminados.VERDE_PARPADEO.colorNomal
-                    delay(500)
+                    delay(300)
                 }
                 else if(lista_Random[i] == 3){
-                    delay(500)
+                    delay(300)
                     _colorAzulLiveData.value = Color(0xFF5F85FF)
-                    delay(500)
+                    delay(300)
                     _colorAzulLiveData.value = ColoresIluminados.AZUL_PARPADEO.colorNomal
-                    delay(500)
+                    delay(300)
                 }
                 else if (lista_Random[i] == 4){
-                    delay(500)
+                    delay(300)
                     _colorAmarilloLiveData.value = Color(0xFFFCFFBE)
-                    delay(500)
+                    delay(300)
                     _colorAmarilloLiveData.value = ColoresIluminados.AMARILLO_PARPADEO.colorNomal
-                    delay(500)
+                    delay(300)
                 }
             }
         }

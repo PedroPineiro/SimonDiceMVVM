@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
         val viewModel = ViewModel()
         enableEdgeToEdge()
         setContent {
-            myApp(viewModel)
+            SimonDiceUI(viewModel)
         }
     }
 }

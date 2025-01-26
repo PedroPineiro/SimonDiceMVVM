@@ -1,5 +1,6 @@
 package com.pedro.simondicemvvm
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -8,7 +9,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -25,7 +25,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,7 +40,7 @@ import com.pedro.simondicemvvm.ui.theme.LightDark
  * app principal del juego
  */
 @Composable
-fun myApp(viewModel: ViewModel) {
+fun SimonDiceUI(viewModel: ViewModel) {
 
     val record by viewModel.recordLiveData.observeAsState(viewModel.getRecord())
     val rondas by viewModel.rondasLiveData.observeAsState(viewModel.getRondas())
@@ -58,7 +60,8 @@ fun myApp(viewModel: ViewModel) {
         modifier = Modifier
             .fillMaxSize()
     ) {
-       /* val backgroundImage = painterResource(id = R.drawable.fondoEstrellas.jpg)
+        // Fondo con imagen
+        val backgroundImage = painterResource(id = R.drawable.fondo) // Asegúrate de que el nombre del recurso sea correcto
         Image(
             painter = backgroundImage,
             contentDescription = null,
@@ -66,13 +69,12 @@ fun myApp(viewModel: ViewModel) {
             modifier = Modifier.fillMaxSize()
         )
 
-        */
 
 
 
         Column {
-            showRecord(record)
-            showAciertos(aciertos)
+            crearRecordText(record)
+            crearAciertosText(aciertos)
         }
 
 
@@ -87,14 +89,14 @@ fun myApp(viewModel: ViewModel) {
 
             Row {
 
-                buttonColor(
+                crearColorButton(
                     viewModel,
                     lista_colores,
                     viewModel.getRandom(),
                     Colores.ROJO.valorColor,
                     colorRojo
                 )
-                buttonColor(
+                crearColorButton(
                     viewModel,
                     lista_colores,
                     viewModel.getRandom(),
@@ -104,14 +106,14 @@ fun myApp(viewModel: ViewModel) {
             }
 
             Row {
-                buttonColor(
+                crearColorButton(
                     viewModel,
                     lista_colores,
                     viewModel.getRandom(),
                     Colores.AZUL.valorColor,
                     colorAzul
                 )
-                buttonColor(
+                crearColorButton(
                     viewModel,
                     lista_colores,
                     viewModel.getRandom(),
@@ -120,9 +122,9 @@ fun myApp(viewModel: ViewModel) {
                 )
             }
 
-            showRondas(rondas)
+            crearRondasText(rondas)
 
-            showButtonStart(viewModel)
+            crearStartButton(viewModel)
 
 
         }
@@ -133,7 +135,7 @@ fun myApp(viewModel: ViewModel) {
  * Interfaz para mostrar el numero de aciertos del usuario
  */
 @Composable
-fun showAciertos(aciertos:Int){
+fun crearAciertosText(aciertos:Int){
         Text(text = "Aciertos: $aciertos" ,
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold)
@@ -143,7 +145,7 @@ fun showAciertos(aciertos:Int){
  * Interfaz para mostrar el record maximo del usuario en el juego
  */
 @Composable
-fun showRecord(record:Int){
+fun crearRecordText(record:Int){
         Text(text = "Record: $record" ,
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold)
@@ -153,7 +155,7 @@ fun showRecord(record:Int){
  * Interfaz con el boton rojo
  */
 @Composable
-fun buttonColor(viewModel: ViewModel, listaColores: MutableList<Int>, lista_Random:MutableList<Int>, colorValor:Int, color: Color){
+fun crearColorButton(viewModel: ViewModel, listaColores: MutableList<Int>, lista_Random:MutableList<Int>, colorValor:Int, color: Color){
 
     var _activo by remember { mutableStateOf(viewModel.estadoLiveData.value!!.botonesColoresActivos) }
 
@@ -184,7 +186,7 @@ fun buttonColor(viewModel: ViewModel, listaColores: MutableList<Int>, lista_Rand
  * Interfaz para mostrar las rondas que lleva el usuario
  */
 @Composable
-fun showRondas(numeroRondas:Int){
+fun crearRondasText(numeroRondas:Int){
     Text(
         text = "Ronda: $numeroRondas",
         fontWeight = FontWeight.Bold,
@@ -196,7 +198,7 @@ fun showRondas(numeroRondas:Int){
  * Interfaz que muestra el boton de start
  */
 @Composable
-fun showButtonStart(viewModel: ViewModel){
+fun crearStartButton(viewModel: ViewModel){
 
     var _activo by remember { mutableStateOf(viewModel.estadoLiveData.value!!.startActivo) }
 
@@ -219,8 +221,4 @@ fun showButtonStart(viewModel: ViewModel){
                 fontWeight = FontWeight.Bold)
 
         }
-
 }
-
-
-

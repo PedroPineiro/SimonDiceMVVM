@@ -59,15 +59,15 @@ fun SimonDiceUI(viewModel: ViewModel) {
     // Caja principal que contiene toda la interfaz
     Box(
         modifier = Modifier
-            .fillMaxSize() // Hace que la caja ocupe todo el tamaño disponible
+            .fillMaxSize()
     ) {
         // Imagen de fondo
         val backgroundImage = painterResource(id = R.drawable.fondo)
         Image(
             painter = backgroundImage, // Carga la imagen desde los recursos
             contentDescription = null, // No se necesita descripción de contenido
-            contentScale = ContentScale.Crop, // Escala la imagen para que cubra todo el fondo
-            modifier = Modifier.fillMaxSize() // Asegura que la imagen ocupe todo el espacio disponible
+            contentScale = ContentScale.Crop, // Escala la imagen para que cubra el fondo
+            modifier = Modifier.fillMaxSize()
         )
 
         // Sección superior: muestra el récord y los aciertos
@@ -88,7 +88,7 @@ fun SimonDiceUI(viewModel: ViewModel) {
 
             verticalArrangement = Arrangement.Center, // Centra verticalmente los elementos
             horizontalAlignment = Alignment.CenterHorizontally, // Centra horizontalmente los elementos
-            modifier = Modifier.fillMaxSize() // Ocupa todo el tamaño disponible
+            modifier = Modifier.fillMaxSize()
 
         ) {
 

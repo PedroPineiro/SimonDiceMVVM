@@ -5,10 +5,15 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -22,9 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
@@ -71,9 +74,16 @@ fun SimonDiceUI(viewModel: ViewModel) {
 
 
 
-        Column {
-            crearRecordText(record)
-            crearAciertosText(aciertos)
+        Column (
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth().padding(top = 45.dp)
+        ) {
+            Row {
+                crearRecordText(record)
+                Spacer(modifier = Modifier.width(60.dp))
+                crearAciertosText(aciertos)
+            }
         }
 
 
@@ -81,9 +91,8 @@ fun SimonDiceUI(viewModel: ViewModel) {
 
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .padding(70.dp)
-                .padding(top = 190.dp, start = 15.dp)
+            modifier = Modifier.fillMaxSize()
+
         ) {
 
             Row {
@@ -95,6 +104,9 @@ fun SimonDiceUI(viewModel: ViewModel) {
                     Colores.ROJO.valorColor,
                     colorRojo
                 )
+
+                Spacer(modifier = Modifier.width(20.dp))
+
                 crearColorButton(
                     viewModel,
                     lista_colores,
@@ -104,6 +116,8 @@ fun SimonDiceUI(viewModel: ViewModel) {
                 )
             }
 
+            Spacer(modifier = Modifier.height(20.dp))
+
             Row {
                 crearColorButton(
                     viewModel,
@@ -112,6 +126,9 @@ fun SimonDiceUI(viewModel: ViewModel) {
                     Colores.AZUL.valorColor,
                     colorAzul
                 )
+
+                Spacer(modifier = Modifier.width(20.dp))
+
                 crearColorButton(
                     viewModel,
                     lista_colores,
@@ -119,9 +136,12 @@ fun SimonDiceUI(viewModel: ViewModel) {
                     Colores.AMARILLO.valorColor,
                     colorAmarillo
                 )
+
             }
 
             crearRondasText(rondas)
+
+            Spacer(modifier = Modifier.height(20.dp))
 
             crearStartButton(viewModel)
 
@@ -136,10 +156,11 @@ fun SimonDiceUI(viewModel: ViewModel) {
 @Composable
 fun crearAciertosText(aciertos:Int){
         Text(
-            text = "Aciertos: $aciertos" ,
+            text = "ACIERTOS: $aciertos",
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold,
-            color = DarkWhite
+            color = DarkWhite,
+
         )
 }
 
@@ -149,7 +170,7 @@ fun crearAciertosText(aciertos:Int){
 @Composable
 fun crearRecordText(record:Int){
         Text(
-            text = "Record: $record" ,
+            text = "RECORD: $record" ,
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold,
             color = DarkWhite
@@ -177,7 +198,7 @@ fun crearColorButton(viewModel: ViewModel, listaColores: MutableList<Int>, lista
             containerColor = color,
         ),
         shape = MaterialTheme.shapes.large,
-        modifier = Modifier.size(150.dp).border(3.dp, DarkWhite, MaterialTheme.shapes.large),
+        modifier = Modifier.size(170.dp).border(3.dp, DarkWhite, MaterialTheme.shapes.large),
     ){
 
     }
@@ -214,16 +235,16 @@ fun crearStartButton(viewModel: ViewModel){
             enabled = _activo,
             onClick = { viewModel.setRandom() },
             colors = ButtonDefaults.buttonColors(
-                containerColor = LightDark,
-                contentColor = DarkWhite
-            ),
+                containerColor = DarkWhite,
+                contentColor = LightDark),
+            shape = MaterialTheme.shapes.large,
             modifier = Modifier
-                .size(145.dp)
-                .clip(RectangleShape)
+                .width(250.dp)
+                .height(100.dp)
         ) {
-            Text(text = "Start",
-                fontSize = 25.sp,
-                fontWeight = FontWeight.Bold)
-
+            Text(text = "START",
+                fontSize = 40.sp,
+                fontWeight = FontWeight.Bold,
+                )
         }
 }

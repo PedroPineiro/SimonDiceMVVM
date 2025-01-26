@@ -36,23 +36,108 @@ import com.pedro.simondicemvvm.datos.ColoresIluminados
 import com.pedro.simondicemvvm.datos.Datos
 import com.pedro.simondicemvvm.datos.Estados
 
+
+/**
+ * app principal del juego
+ */
+@Composable
+fun myApp(viewModel: ViewModel) {
+
+    val record by viewModel.recordLiveData.observeAsState(viewModel.getRecord())
+    val rondas by viewModel.rondasLiveData.observeAsState(viewModel.getRondas())
+    val aciertos by viewModel.aciertosLiveData.observeAsState(viewModel.getAciertos())
+
+
+    var lista_colores = remember { mutableStateListOf<Int>() }
+
+    val colorRojo by viewModel.colorRojoLiveData.observeAsState(viewModel.getColorRed())
+    val colorVerde by viewModel.colorVerdeLiveData.observeAsState(viewModel.getColorGreen())
+    val colorAzul by viewModel.colorAzulLiveData.observeAsState(viewModel.getColorBlue())
+    val colorAmarillo by viewModel.colorAmarilloLiveData.observeAsState(viewModel.getColorYellow())
+
+
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+       /* val backgroundImage = painterResource(id = R.drawable.fondoEstrellas.jpg)
+        Image(
+            painter = backgroundImage,
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
+
+        */
+
+
+
+        Column {
+            RecordMaximo(record)
+            showAciertos(aciertos)
+        }
+
+
+        Column(
+
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .padding(70.dp)
+                .padding(top = 190.dp, start = 15.dp)
+        ) {
+
+            Row {
+
+                buttonColor(
+                    viewModel, lista_colores, viewModel.getRandom(), Colores.ROJO.valorColor,
+                    colorRojo
+                )
+                buttonColor(
+                    viewModel,
+                    lista_colores,
+                    viewModel.getRandom(),
+                    Colores.VERDE.valorColor,
+                    colorVerde
+                )
+            }
+
+            Row {
+                buttonColor(
+                    viewModel,
+                    lista_colores,
+                    viewModel.getRandom(),
+                    Colores.AZUL.valorColor,
+                    colorAzul
+                )
+                buttonColor(
+                    viewModel,
+                    lista_colores,
+                    viewModel.getRandom(),
+                    Colores.AMARILLO.valorColor,
+                    colorAmarillo
+                )
+            }
+
+            showRondas(rondas)
+
+            showButtonStart(viewModel)
+
+
+        }
+    }
+}
+
 /**
  * Interfaz para mostrar el numero de aciertos del usuario
  */
 @Composable
 fun showAciertos(aciertos:Int){
-    Column(verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .padding(top = 90.dp, start = 126.dp)) {
 
         Text(text = "Aciertos: $aciertos" ,
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold)
-
-        Log.d("Record", aciertos.toString())
-
-    }
 
 }
 
@@ -166,76 +251,6 @@ fun showButtonStart(viewModel: ViewModel){
 
 
 
-/**
- * app principal del juego
- */
-@Composable
-fun myApp(viewModel: ViewModel) {
-
-    val record by viewModel.recordLiveData.observeAsState(viewModel.getRecord())
-    val rondas by viewModel.rondasLiveData.observeAsState(viewModel.getRondas())
-    val aciertos by viewModel.aciertosLiveData.observeAsState(viewModel.getAciertos())
-
-
-
-    var lista_colores = remember { mutableStateListOf<Int>() }
-
-    val colorRojo by viewModel.colorRojoLiveData.observeAsState(viewModel.getColorRed())
-    val colorVerde by viewModel.colorVerdeLiveData.observeAsState(viewModel.getColorGreen())
-    val colorAzul by viewModel.colorAzulLiveData.observeAsState(viewModel.getColorBlue())
-    val colorAmarillo by viewModel.colorAmarilloLiveData.observeAsState(viewModel.getColorYellow())
-
-
-
-    Box (modifier = Modifier
-        .fillMaxSize()
-    ){
-        /*val backgroundImage = painterResource(id = R.drawable.fondo)
-        Image(
-            painter = backgroundImage,
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
-        )
-
-         */
-
-        Column {
-            RecordMaximo(record)
-            showAciertos(aciertos)
-        }
-
-
-        Column(
-
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .padding(70.dp)
-                .padding(top = 190.dp, start = 15.dp)
-        ) {
-
-            Row {
-
-                buttonColor(viewModel, lista_colores, viewModel.getRandom(), Colores.ROJO.valorColor,
-                    colorRojo
-                )
-                buttonColor(viewModel, lista_colores, viewModel.getRandom(), Colores.VERDE.valorColor, colorVerde)
-            }
-
-            Row {
-                buttonColor(viewModel, lista_colores, viewModel.getRandom(), Colores.AZUL.valorColor, colorAzul)
-                buttonColor(viewModel, lista_colores, viewModel.getRandom(), Colores.AMARILLO.valorColor, colorAmarillo)
-            }
-
-            showRondas(rondas)
-
-            showButtonStart(viewModel)
-
-
-
-        }
-    }
 
 }
 

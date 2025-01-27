@@ -23,14 +23,18 @@ class ViewModel(): ViewModel() {
 
     var random = Random
 
+    // LiveData para observar el estado del juego
     val estadoLiveData : MutableLiveData<Estados> = MutableLiveData(Estados.INICIO)
 
+    // LiveData para observar el récord del usuario
     private val _recordLiveData = MutableLiveData<Int>()
     val recordLiveData: LiveData<Int> get() = _recordLiveData
 
+    // LiveData para observar el número de aciertos del usuario
     private val _aciertosLiveData = MutableLiveData<Int>()
     val aciertosLiveData: LiveData<Int> get() = _aciertosLiveData
 
+    // LiveData para observar el color de los botones
     private var _colorRojoLiveData = MutableLiveData<Color>()
     val colorRojoLiveData : LiveData<Color> get() = _colorRojoLiveData
 
@@ -43,6 +47,7 @@ class ViewModel(): ViewModel() {
     private var _colorAmarilloLiveData = MutableLiveData<Color>()
     val colorAmarilloLiveData : LiveData<Color> get() = _colorAmarilloLiveData
 
+    // Inicializa los colores de los botones
     init {
         _colorRojoLiveData.value = ColoresIluminados.ROJO_PARPADEO.colorNomal
         _colorVerdeLiveData.value = ColoresIluminados.VERDE_PARPADEO.colorNomal
@@ -50,6 +55,7 @@ class ViewModel(): ViewModel() {
         _colorAmarilloLiveData.value = ColoresIluminados.AMARILLO_PARPADEO.colorNomal
     }
 
+    // Inicializa el récord y los aciertos
     init {
         _recordLiveData.value = record
         _aciertosLiveData.value = aciertos
@@ -174,11 +180,6 @@ class ViewModel(): ViewModel() {
 
     /**
      * Lógica para cuando el usuario gana una ronda.
-     * 1. Guarda el récord.
-     * 2. Incrementa las rondas.
-     * 3. Limpia la lista de colores.
-     * 4. Limpia la lista de números aleatorios.
-     * 5. Incrementa el contador de rondas.
      */
     fun onWin(listaColores: MutableList<Int>) {
         estadoLiveData.value = Estados.INICIO
@@ -188,11 +189,6 @@ class ViewModel(): ViewModel() {
 
     /**
      * Lógica para cuando el usuario pierde una ronda.
-     * 1. Reinicia el número de aciertos.
-     * 2. Reinicia las rondas.
-     * 3. Limpia la lista de colores.
-     * 4. Limpia la lista de números aleatorios.
-     * 5. Establece el contador de nuevo a 1.
      */
     fun onLose(listaColores: MutableList<Int>){
         estadoLiveData.value = Estados.INICIO

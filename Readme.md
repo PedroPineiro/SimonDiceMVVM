@@ -80,16 +80,16 @@ La clase ViewModel contiene la lógica de la interfaz de usuario y maneja el est
 
 ## Model (Datos)
 
-### Colores
+### `Colores`
 Enum que define los colores utilizados en el juego y sus valores asociados
 
-### ColoresIluminados
+### `ColoresIluminados`
 Enum que define los colores normales e iluminados utilizados en el juego
 
-### Datos
+### `Datos`
 Objeto que almacena los datos del juego, como el número de aciertos, el récord, y las listas de números aleatorios y colores seleccionados por el usuario
 
-### Estados
+### `Estados`
 Enum que gestiona los estados de la aplicación, como INICIO y ADIVINANDO
 
 ## Diagrama

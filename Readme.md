@@ -54,19 +54,19 @@ Función composable que muestra el botón de inicio. Este botón inicia el juego
 ## ViewModel
 La clase ViewModel contiene la lógica de la interfaz de usuario y maneja el estado del juego. A continuación se describen los métodos y propiedades principales de esta clase:
 ### Propiedades
-### `LiveData`: Se utilizan para observar cambios en el estado del juego y actualizar la UI en consecuencia.
-### `recordLiveData`: Almacena el récord del usuario.
-### `aciertosLiveData`: Almacena el número de aciertos del usuario.
-### `colorRojoLiveData`, colorVerdeLiveData, colorAzulLiveData, colorAmarilloLiveData: Almacenan los colores de los botones.
-### `estadoLiveData`: Almacena el estado actual del juego (INICIO o ADIVINANDO).
-Métodos
-### addColor: Añade un color a la secuencia del usuario y verifica si ha ganado o perdido.
-### getRandom: Devuelve la lista de números aleatorios generados por la máquina.
-### clearListaRandoms: Limpia la lista de números aleatorios.
-### clearListaColores: Limpia la lista de colores seleccionados por el usuario.
-### winOrLose: Verifica si el usuario ha ganado o perdido el juego.
-### auxWinOrLose: Función auxiliar para verificar si la secuencia del usuario coincide con la secuencia de la máquina.
-### onWin: Lógica para cuando el usuario gana una ronda.
-### onLose: Lógica para cuando el usuario pierde una ronda.
-### cambiosColores: Cambia los colores según la secuencia aleatoria generada.
-### getColorRed, getColorGreen, getColorBlue, getColorYellow: Devuelven los colores normales de los botones.
+`LiveData`: Se utilizan para observar cambios en el estado del juego y actualizar la UI en consecuencia.
+`recordLiveData`: Almacena el récord del usuario.
+`aciertosLiveData`: Almacena el número de aciertos del usuario.
+`colorRojoLiveData`, colorVerdeLiveData, colorAzulLiveData, colorAmarilloLiveData: Almacenan los colores de los botones.
+`estadoLiveData`: Almacena el estado actual del juego (INICIO o ADIVINANDO).
+### Métodos
+`addColor`: Añade un color a la secuencia del usuario y verifica si ha ganado o perdido.
+`getRandom`: Devuelve la lista de números aleatorios generados por la máquina.
+`clearListaRandoms`: Limpia la lista de números aleatorios.
+`clearListaColores`: Limpia la lista de colores seleccionados por el usuario.
+`winOrLose`: Verifica si el usuario ha ganado o perdido el juego.
+`auxWinOrLose`: Función auxiliar para verificar si la secuencia del usuario coincide con la secuencia de la máquina.
+`onWin`: Lógica para cuando el usuario gana una ronda.
+`onLose`: Lógica para cuando el usuario pierde una ronda.
+`cambiosColores`: Cambia los colores según la secuencia aleatoria generada.
+`getColorRed, getColorGreen, getColorBlue, getColorYellow`: Devuelven los colores normales de los botones.

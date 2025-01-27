@@ -21,35 +21,24 @@ Juego de Simon Dice desarrollado en Android Studio con Kotlin, Jetpack Compose y
 
 ![estructuraMVVM.png](imgs/estructuraMVVM.png)
 
-## Interfaz de Usuario (UI)
+## View (UI)
 
 La interfaz de usuario del juego Simon Dice está construida utilizando Jetpack Compose. A continuación se describen los componentes principales de la UI:
 
-### `SimonDiceUI`
-
-Esta función composable es la principal de la aplicación y se encarga de organizar los diferentes elementos de la interfaz de usuario
+`SimonDiceUI`: Esta función composable es la principal de la aplicación y se encarga de organizar los diferentes elementos de la interfaz de usuario
 
 - **Imagen de Fondo**: Se muestra una imagen de fondo que ocupa toda la pantalla
 - **Panel de Información**: Contiene dos textos que muestran el récord y el número de aciertos del usuario
 - **Botones de Colores**: Cuatro botones de colores (rojo, verde, azul y amarillo) que el usuario debe presionar en la secuencia correcta
 - **Botón de Inicio**: Un botón de "START" que inicia el juego
 
-### `crearAciertosText`
+`crearAciertosText`: Función composable que muestra el número de aciertos del usuario
 
-Función composable que muestra el número de aciertos del usuario
+`crearRecordText`: Función composable que muestra el récord máximo del usuario en el juego
 
-### `crearRecordText`
+`crearColorButton`: Función composable que crea un botón de color. Cada botón tiene un color específico y se activa o desactiva según el estado del juego
 
-Función composable que muestra el récord máximo del usuario en el juego
-
-### `crearColorButton`
-
-Función composable que crea un botón de color. Cada botón tiene un color específico y se activa o desactiva según el estado del juego
-
-### `crearStartButton`
-
-Función composable que muestra el botón de inicio. Este botón inicia el juego y genera una secuencia de colores aleatoria
-
+`crearStartButton`: Función composable que muestra el botón de inicio. Este botón inicia el juego y genera una secuencia de colores aleatoria
 
 ## ViewModel
 
@@ -88,3 +77,21 @@ La clase ViewModel contiene la lógica de la interfaz de usuario y maneja el est
 `cambiosColores`: Cambia los colores según la secuencia aleatoria generada
 
 `getColorRed, getColorGreen, getColorBlue, getColorYellow`: Devuelven los colores normales de los botones
+
+## Model (Datos)
+
+### Colores
+Enum que define los colores utilizados en el juego y sus valores asociados
+
+### ColoresIluminados
+Enum que define los colores normales e iluminados utilizados en el juego
+
+### Datos
+Objeto que almacena los datos del juego, como el número de aciertos, el récord, y las listas de números aleatorios y colores seleccionados por el usuario
+
+### Estados
+Enum que gestiona los estados de la aplicación, como INICIO y ADIVINANDO
+
+## Diagrama
+
+![DiagramaSecuencia.png](imgs/DiagramaSecuencia.png)

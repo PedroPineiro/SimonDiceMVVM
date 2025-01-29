@@ -13,7 +13,7 @@ enum class Estados(val startActivo: Boolean, val botonesColoresActivos: Boolean)
      * 1. INICIO -> Cuando la aplicación inicia y el botón de inicio aún no ha sido presionado.
      * 2. ADIVINANDO -> Cuando el usuario está presionando los botones de colores para adivinar los números.
      */
-    INICIO(startActivo = true, botonesColoresActivos = true),
+    INICIO(startActivo = true, botonesColoresActivos = false),
 
     ADIVINANDO(startActivo = false, botonesColoresActivos = true),
 }

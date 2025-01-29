@@ -21,8 +21,6 @@ import kotlinx.coroutines.launch
  */
 class ViewModel(): ViewModel() {
 
-    var random = Random
-
     // LiveData para observar el estado del juego
     val estadoLiveData : MutableLiveData<Estados> = MutableLiveData(Estados.INICIO)
 
@@ -47,6 +45,8 @@ class ViewModel(): ViewModel() {
     private var _colorAmarilloLiveData = MutableLiveData<Color>()
     val colorAmarilloLiveData : LiveData<Color> get() = _colorAmarilloLiveData
 
+    var random = Random
+
     // Inicializa los colores de los botones
     init {
         _colorRojoLiveData.value = ColoresIluminados.ROJO_PARPADEO.colorNomal
@@ -64,7 +64,7 @@ class ViewModel(): ViewModel() {
     /**
      * Incrementa el número de aciertos del usuario.
      */
-    fun incrementAciertos() {
+    fun incrementarAciertos() {
         aciertos += 1
         _aciertosLiveData.value = aciertos
     }
@@ -72,7 +72,7 @@ class ViewModel(): ViewModel() {
     /**
      * Incrementa el récord si el número actual de aciertos es mayor.
      */
-    fun incrementRecord() {
+    fun incrementarRecord() {
         if (getRecord() < getAciertos()) {
             record = aciertos
             _recordLiveData.value = record
@@ -96,15 +96,15 @@ class ViewModel(): ViewModel() {
     /**
      * Incrementa tanto el número de aciertos como el récord.
      */
-    fun incrementValues(){
-        incrementAciertos()
-        incrementRecord()
+    fun incrementarValues(){
+        incrementarAciertos()
+        incrementarRecord()
     }
 
     /**
      * Reinicia el número de aciertos a cero.
      */
-    fun restartValues(){
+    fun reiniciarValores(){
         aciertos = 0
         _aciertosLiveData.value = aciertos
     }
@@ -116,7 +116,7 @@ class ViewModel(): ViewModel() {
         numRandom = random.nextInt(4) + 1
         Datos.listaNumerosRandom.add(numRandom)
         estadoLiveData.value = Estados.ADIVINANDO
-        cambiosColores(Datos.listaNumerosRandom)
+        cambiarColores(Datos.listaNumerosRandom)
         Log.d("Random", Datos.listaNumerosRandom.toString())
     }
 
@@ -183,7 +183,7 @@ class ViewModel(): ViewModel() {
      */
     fun onWin(listaColores: MutableList<Int>) {
         estadoLiveData.value = Estados.INICIO
-        incrementValues()
+        incrementarValues()
         clearListaColores(listaColores)
     }
 
@@ -192,7 +192,7 @@ class ViewModel(): ViewModel() {
      */
     fun onLose(listaColores: MutableList<Int>){
         estadoLiveData.value = Estados.INICIO
-        restartValues()
+        reiniciarValores()
         clearListaColores(listaColores)
         clearListaRandoms()
     }
@@ -200,7 +200,7 @@ class ViewModel(): ViewModel() {
     /**
      * Cambia los colores según la secuencia aleatoria generada.
      */
-    private fun cambiosColores(lista_Random: MutableList<Int>){
+    private fun cambiarColores(lista_Random: MutableList<Int>){
         viewModelScope.launch {
             for(i in 0 until lista_Random.size){
                 if(lista_Random[i] == 1){
